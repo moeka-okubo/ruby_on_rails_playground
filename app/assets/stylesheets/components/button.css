@@ -1,0 +1,16 @@
+.button {
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.-danger {
+  background: #ff2252;
+  color: #fff;
+}
+
+.-primary {
+  background: #44fa87;
+  color: #222;
+}

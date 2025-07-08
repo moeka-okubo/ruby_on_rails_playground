@@ -8,6 +8,11 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+ *= require components/button
+ *= require components/toggle
+*/
 body {
   text-align: center;
 }
@@ -34,11 +39,19 @@ body {
   border: 1px solid;
 }
 
+.task-complete {
+  padding: 8px 0;
+}
+
+.task-delete {
+  padding: 4px;
+}
+
 .new-task {
   width: 100%;
 }
 
-.new-form-row:nth-of-type(2n) {
+.new-form-row:nth-of-type(2n) > * {
   padding-top: 16px;
 }
 
