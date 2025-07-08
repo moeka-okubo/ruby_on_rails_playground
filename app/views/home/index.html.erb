@@ -1,0 +1,45 @@
+<% content_for :title, "TODOリストのページ" %>
+<div class="container">
+  <h1>TODOリスト</h1>
+  <p>Railsの勉強用</p>
+  <p>あとはCSSを適用</p>
+</div>
+<div class="features">
+  <h2>TODOリスト</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th></th>
+        <th>タイトル</th>
+        <th>内容</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.id %></td>
+          <%= form_with(model: task, url: task_path(task), method: :patch, local: true) do |form| %>
+            <td>
+              <%= form.check_box :completed, { onChange: "this.form.requestSubmit()", class: 'task-completed-checkbox' } , true, false %>
+            </td>
+          <% end %>
+          <td><%= task.title %></td>
+          <td><%= task.description %></td>
+          <%= form_with(model: task, url: task_path(task), method: :delete, local: true) do |form| %>
+            <td><%= form.button "削除" %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h2>新しいTODOを追加</h2>
+  <%= form_with(model: @task, url:tasks_path, local: true) do|form| %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+    <%= form.submit "追加" %>
+  <% end%>
+</div>
