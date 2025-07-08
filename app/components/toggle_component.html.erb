@@ -1,0 +1,4 @@
+<div class="toggle-button">
+  <%= @form.check_box :completed, { id: "toggle-#{@id}", class:"toggle-input", onChange: @on_change} , true, false %>
+  <label for="toggle-<%= @id %>" class="toggle-label" ></label>
+</div>
