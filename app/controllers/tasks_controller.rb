@@ -5,10 +5,6 @@ class TasksController < ApplicationController
   # end
 
   def create
-    Rails.logger.debug "🐹🐹🐹🐹🐹🐹🐹🐹"
-    Rails.logger.debug "テストです"
-    Rails.logger.debug @task
-    Rails.logger.debug @task.inspect
     @task = Task.new(task_params)
 
     if @task.save
