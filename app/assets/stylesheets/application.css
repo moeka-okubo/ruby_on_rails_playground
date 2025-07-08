@@ -8,3 +8,50 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+body {
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.title-note {
+  margin-top: 0;
+}
+
+.tasks {
+  width: 100%;
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+.tasks > tbody > tr:nth-of-type(2n) {
+  background-color: #eee;
+}
+
+.tasks td {
+  border: 1px solid;
+}
+
+.new-task {
+  width: 100%;
+}
+
+.new-form-row:nth-of-type(2n) {
+  padding-top: 16px;
+}
+
+.new-form-header {
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.new-form-cell,
+.new-form {
+  width: 100%;
+}
+
+.description {
+  min-height: 300px;
+}
