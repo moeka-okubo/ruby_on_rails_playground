@@ -36,15 +36,6 @@ class TasksController < ApplicationController
   def edit
   end
 
-  def bulk_update
-    params[:tasks].each do |task_id, task_params|
-      task = Task.find(task_id)
-      completed = task_params[:completed] == "true"
-      task.update(completed: completed)
-    end
-    redirect_to root_path, notice: "タスクを一括更新しました"
-  end
-
   private
   def set_task
     @task = Task.find(params[:id])
