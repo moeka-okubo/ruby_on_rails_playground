@@ -31,6 +31,7 @@ export default class extends Controller {
       tasks = this.tasks.filter((task) => task.is_deleted);
     }
     this.updateTaskDisplay(tasks);
+    this.updateCategory(category);
   }
 
   updateTaskDisplay(tasks) {
@@ -47,6 +48,17 @@ export default class extends Controller {
         visibleCount++;
       } else {
         taskElement.style.display = "none";
+      }
+    });
+  }
+
+  updateCategory(category) {
+    this.itemTargets.forEach((item) => {
+      if (item.classList.contains("-selected")) {
+        item.classList.remove("-selected");
+      }
+      if (item.dataset.category === category) {
+        item.classList.add("-selected");
       }
     });
   }
