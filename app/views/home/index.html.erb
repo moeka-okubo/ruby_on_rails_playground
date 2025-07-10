@@ -21,26 +21,46 @@
   </div>
 </div>
 <footer class="footer">
-  <%= form_with(model: @task, url:tasks_path) do|form| %>
+  <%= form_with(model: @task, url:tasks_path, data: { controller: "validation" }) do |form| %>
     <div class="new-task">
       <%= form.label :title, "タイトル", class: "new-task-label" %>
-      <%= form.text_field :title, class: "new-task-form #{@task.errors[:title].any? ? '-error' : ''}", placeholder: "タイトルを入力してください" %>
-      <% if @task.errors[:title].any? %>
-        <% @task.errors[:title].each do |message| %>
-          <div class="error-message">
-            <%= message %>
-          </div>
+      <%= form.text_field :title,
+        class: "new-task-form #{@task.errors[:title].any? ? '-error' : ''}",
+        placeholder: "タイトルを入力してください",
+        data: { validation_target: "field" }
+      %>
+      <div
+        class="error-message"
+        data-validation-target="error"
+        data-field="title"
+        style="<%= @task.errors[:title].any? ? 'display: block;' : 'display: none;' %>"
+      >
+        <% if @task.errors[:title].any? %>
+          <% @task.errors[:title].each do |message| %>
+            <div class="error-item"><%= message %></div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
     <div class="new-task">
       <%= form.label :description, "内容", class: "new-task-label" %>
-      <%= form.text_area :description, class: "new-task-form description", placeholder: "内容を入力してください" %>
-      <% if @task.errors[:description].any? %>
-        <div class="error-message">
-          <%= @task.errors[:description][0] %>
-        </div>
-      <% end %>
+      <%= form.text_area :description,
+        class: "new-task-form description #{@task.errors[:description].any? ? '-error' : ''}",
+        placeholder: "内容を入力してください",
+        data: { validation_target: "field" }
+      %>
+      <div
+        class="error-message"
+        data-validation-target="error"
+        data-field="description"
+        style="<%= @task.errors[:description].any? ? 'display: block;' : 'display: none;' %>"
+      >
+        <% if @task.errors[:description].any? %>
+          <% @task.errors[:description].each do |message| %>
+            <div class="error-item"><%= message %></div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <%= render(ButtonComponent.new(label: "追加", type: "submit", class_name: "new-task-button" ,is_black: true,)) %>
   <% end%>
