@@ -24,11 +24,23 @@
   <%= form_with(model: @task, url:tasks_path) do|form| %>
     <div class="new-task">
       <%= form.label :title, "タイトル", class: "new-task-label" %>
-      <%= form.text_field :title, class: "new-task-form", placeholder: "タイトルを入力してください" %>
+      <%= form.text_field :title, class: "new-task-form #{@task.errors[:title].any? ? '-error' : ''}", placeholder: "タイトルを入力してください" %>
+      <% if @task.errors[:title].any? %>
+        <% @task.errors[:title].each do |message| %>
+          <div class="error-message">
+            <%= message %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="new-task">
       <%= form.label :description, "内容", class: "new-task-label" %>
       <%= form.text_area :description, class: "new-task-form description", placeholder: "内容を入力してください" %>
+      <% if @task.errors[:description].any? %>
+        <div class="error-message">
+          <%= @task.errors[:description][0] %>
+        </div>
+      <% end %>
     </div>
     <%= render(ButtonComponent.new(label: "追加", type: "submit", class_name: "new-task-button" ,is_black: true,)) %>
   <% end%>

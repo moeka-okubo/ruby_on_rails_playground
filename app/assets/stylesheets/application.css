@@ -131,7 +131,6 @@ body {
   bottom: 0;
   left: 0;
   width: calc(100% - 32px);
-  height: 350px;
   background-color: #fff;
   border-top: 1px solid #ccc;
   z-index: 10000000000;
@@ -157,11 +156,6 @@ body {
   padding-top: 16px;
 }
 
-.new-form-header {
-  white-space: nowrap;
-  padding-right: 8px;
-}
-
 .new-form-cell,
 .new-form {
   width: 100%;
@@ -177,6 +171,10 @@ body {
   outline-color: #ddd;
 }
 
+.new-task-form.-error {
+  border: 1px solid #dc3545;
+}
+
 .description {
   min-height: 100px;
 }
@@ -186,4 +184,11 @@ body {
   max-width: 600px;
   margin: 16px auto 0;
   padding: 16px 16px;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 4px;
+  text-align: left;
 }
