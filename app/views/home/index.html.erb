@@ -1,14 +1,45 @@
 <% content_for :title, "TODOリストのページ" %>
-<div class="container">
+<div class="container" data-controller="category">
   <ul class="lists">
-    <li class="list-item -selected">未削除全て</li>
-    <li class="list-item">未完了のみ</li>
-    <li class="list-item">完了済みのみ</li>
-    <li class="list-item">削除ずみ</li>
+    <li
+      class="list-item -selected"
+      data-action="click->category#changeCategory"
+      data-category="all"
+      data-category-target="item"
+      >
+      未削除全て
+    </li>
+    <li
+      class="list-item"
+      data-action="click->category#changeCategory"
+      data-category="incomplete"
+      data-category-target="item"
+      >
+      未完了のみ
+    </li>
+    <li
+      class="list-item"
+      data-action="click->category#changeCategory"
+      data-category="completed"
+      data-category-target="item"
+      >
+      完了済みのみ
+    </li>
+    <li
+      class="list-item"
+      data-action="click->category#changeCategory"
+      data-category="deleted"
+      data-category-target="item"
+      >削除ずみ
+    </li>
   </ul>
-  <div class="tasks">
+  <div
+    class="tasks"
+    data-category-target="taskContainer"
+    data-tasks="<%= @tasks.to_json(only: [:id, :title, :completed, :is_deleted]) %>"
+  >
     <% @tasks.each do |task| %>
-      <div class="task">
+      <div class="task" data-task-id="<%= task.id %>">
         <%= form_with(model: task, url: task_path(task), method: :patch, local: true) do |form| %>
           <%= render(CheckboxComponent.new(form: form,id: task.id, is_active: task.completed, on_change: "this.form.requestSubmit()" )) %>
         <% end %>
