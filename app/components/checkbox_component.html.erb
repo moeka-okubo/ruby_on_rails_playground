@@ -1,0 +1,4 @@
+<div class="checkbox">
+  <%= @form.check_box :completed, { id: "checkbox-#{@id}", class:"checkbox-input", onChange: @on_change} , true, false %>
+  <label for="checkbox-<%= @id %>" class="checkbox-label" ></label>
+</div>

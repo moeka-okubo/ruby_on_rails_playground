@@ -12,9 +12,33 @@
 /*
  *= require components/button
  *= require components/toggle
+ *= require components/checkbox
 */
 body {
   text-align: center;
+  margin: 0;
+  padding: 0 16px;
+  background-color: #eee;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  z-index: 10000000000;
+}
+
+.header-title {
+  margin: 16px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.header + * {
+  margin-top: 80px;
 }
 
 .title {
@@ -25,30 +49,108 @@ body {
   margin-top: 0;
 }
 
+.container {
+  display: flex;
+  align-items: flex-start;
+  height: calc(100vh - 80px - 400px);
+  margin-top: 80px;
+  margin-bottom: 250px;
+  overflow-y: auto;
+}
+
+.lists {
+  margin: 0;
+  padding: 0;
+  text-align-last: left;
+  background-color: #fff;
+  color: #ccc;
+  border-radius: 8px;
+}
+
+.list-item {
+  list-style: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.list-item.-selected {
+  background-color: #ccc;
+  color: #000;
+  cursor: default;
+}
+
+.list-item:first-of-type {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.item:last-of-type {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 .tasks {
-  width: 100%;
-  border: 1px solid;
-  border-collapse: collapse;
+  flex: 1;
+  margin-left: 16px;
 }
 
-.tasks > tbody > tr:nth-of-type(2n) {
-  background-color: #eee;
+.task {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
 }
 
-.tasks td {
-  border: 1px solid;
+.task:nth-of-type(n + 2) {
+  margin-top: 16px;
 }
 
-.task-complete {
-  padding: 8px 0;
+.task-title {
+  margin: 0;
+  margin-left: 16px;
+  flex: 1;
+  text-align-last: left;
 }
 
-.task-delete {
-  padding: 4px;
+.task-delete-button.button {
+  background-color: transparent;
+  color: #ccc;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+
+.task-delete-button:hover {
+  color: #222;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 32px);
+  height: 350px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 10000000000;
+  padding: 16px;
 }
 
 .new-task {
-  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  text-align-last: left;
+}
+
+.new-task:nth-of-type(n + 2) {
+  margin-top: 16px;
+}
+
+.new-task-label {
+  font-weight: 700;
 }
 
 .new-form-row:nth-of-type(2n) > * {
@@ -65,6 +167,23 @@ body {
   width: 100%;
 }
 
+.new-task-form {
+  display: block;
+  width: calc(100% - 16px);
+  margin-top: 8px;
+  padding: 8px;
+  border: none;
+  font-size: 16px;
+  outline-color: #ddd;
+}
+
 .description {
-  min-height: 300px;
+  min-height: 100px;
+}
+
+.new-task-button.button {
+  width: 100%;
+  max-width: 600px;
+  margin: 16px auto 0;
+  padding: 16px 16px;
 }
