@@ -22,17 +22,30 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   # end
 
   test "should get create" do
-    get tasks_create_url
-    assert_response :success
+    assert_difference("Task.count") do
+      post tasks_url, params: { task: { title: "新しいタスクテスト", description: "新しいタスクテスト内容" } }
+    end
+    assert_redirected_to tasks_url
+    task = Task.last
+    assert_equal "新しいタスクテスト", task.title
+    assert_equal "新しいタスクテスト内容", task.description
   end
 
   test "should get update" do
-    get tasks_update_url
-    assert_response :success
+    task = Task.create(id: 0, title: "完了用テスト", description: "完了用テスト内容", completed: false)
+    patch task_url(task.id), params: { task: { completed: true } }
+    assert_redirected_to tasks_url, notice: "タスクを完了変更"
+    task.reload
+    assert_equal "完了用テスト", task.title
+    assert_equal true, task.completed
   end
 
   test "should get destroy" do
-    get tasks_destroy_url
-    assert_response :success
+    task = Task.create(id: 0, title: "削除用テスト", description: "削除用テスト内容", completed: false)
+    delete task_url(task.id), params: { task: { is_deleted: true } }
+    assert_redirected_to tasks_url, notice: "タスクを削除"
+    task.reload
+    assert_equal "削除用テスト", task.title
+    assert_equal true, task.is_deleted
   end
 end
